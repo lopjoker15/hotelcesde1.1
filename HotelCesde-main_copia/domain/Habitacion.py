@@ -59,7 +59,7 @@ class User:
 class Room:
     def __init__(self, room_number, room_type, price, is_available=True):
         self.room_number = room_number
-        self.room_type = room_type  # Ej: 'individual', 'doble', 'suite'
+        self.room_type = room_type  
         self.price = price
         self.is_available = is_available
 
