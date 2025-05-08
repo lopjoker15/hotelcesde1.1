@@ -32,8 +32,11 @@ class CustomerService:
         self.customer_repository.createCustomerReposity(db,customer)
 
 
-    def login(self,db, email, password):
+    def login(self, db, email, password):
         if self.customer_repository.login(db, email, password):
             print("Login exitoso")
+            return True
         else:
             print("Error en el login")
+            return False
+
