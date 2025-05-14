@@ -33,10 +33,12 @@ class CustomerService:
 
 
     def login(self, db, email, password):
-        if self.customer_repository.login(db, email, password):
+        customer = self.customer_repository.get_customer_by_credentials(db, email, password)
+        if customer:
             print("Login exitoso")
-            return True
+            return customer
         else:
             print("Error en el login")
-            return False
+            return None
+
 
