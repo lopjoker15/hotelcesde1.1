@@ -46,16 +46,21 @@ class Menu:
                 print("\nMenú - Usuario autenticado:")
                 print("1. Ver servicios")
                 print("2. Hacer una reserva")
-                print("3. Salir")
+                print("3. Realizar un pago")
+                print("4. Salir")
+                
                 option = input("Seleccione una opción: ")
-    
+                
                 if option == '1':
-                     self.servicio_service.mostrar_servicios(self.db, self.customer.id)
+                    self.servicio_service.mostrar_servicios(self.db, self.customer.id)
                 elif option == '2':
                     self.reserva_service.hacer_reserva(self.db)
                 elif option == '3':
+                    self.pago_service.realizar_pago(self.db, self.customer.id)
+                elif option == '4':
                     print("Saliendo del programa...")
                     break
+
                 else:
                     print("Opción no válida. Por favor, seleccione una opción correcta.")
 
