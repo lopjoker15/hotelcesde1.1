@@ -4,6 +4,7 @@ from data.CustomerRepository import CustomerRepository
 from data.ConexionMySQL import Conexion
 from application.ReservaService import ReservaService
 from application.ServicioService import ServicioService
+from application.PagoService import PagoService
 
 
 class Menu:
@@ -15,6 +16,7 @@ class Menu:
         self.customer_repo = CustomerRepository()
         self.reserva_service = ReservaService()
         self.servicio_service = ServicioService()
+        self.pago_service = PagoService()
         self.logged_in = False  # Estado de sesión
 
     def app(self):
