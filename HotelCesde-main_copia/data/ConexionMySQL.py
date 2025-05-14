@@ -39,12 +39,14 @@ class Conexion:
     def execute_query(self, query, params=None):
         cursor = self.connection.cursor()
         try:
-            cursor.execute(query, params)
-            self.connection.commit()
-            print("Consulta ejecutada exitosamente")
-            if query.lower().startswith('select'):
+            cursor.execute(query, params or ())
+            if query.strip().lower().startswith('select'):
                 result = cursor.fetchall()
                 return result
+            else:
+                self.connection.commit()
+                print("Consulta ejecutada exitosamente")
+                return None
         except mysql.connector.Error as err:
             print("Error al ejecutar la consulta", err)
             return None

@@ -1,14 +1,26 @@
-from data.HabitacionRepository import RoomRepository
-from domain.User import Room
+from domain.Habitacion import Habitacion
+from data.HabitacionRepository import HabitacionRepository
 
-class RoomService:
-    def __init__(self, room_repo: RoomRepository):
-        self.room_repo = room_repo
+class HabitacionService:
+    def __init__(self):
+        self.repo = HabitacionRepository()
 
-    def create_room(self, room_number, room_type, price):
-        room = Room(room_number, room_type, price)
-        self.room_repo.add_room(room)
-        return room
+    def agregar_habitacion(self, db):
+        print("\n--- Agregar Habitación ---")
+        numero = input("Número de habitación: ")
+        tipo = input("Tipo (Individual, Doble, Suite): ").capitalize()
+        precio = float(input("Precio por noche: "))
+        estado = input("Estado (Disponible, Ocupada, Mantenimiento): ").capitalize()
 
-    def list_available_rooms(self):
-        return self.room_repo.get_available_rooms()
+        habitacion = Habitacion(None, numero, tipo, precio, estado)
+        self.repo.crear_habitacion(db, habitacion)
+        print("Habitación agregada con éxito.")
+
+    def listar_habitaciones(self, db):
+        print("\n--- Lista de Habitaciones ---")
+        habitaciones = self.repo.obtener_todas(db)
+        if habitaciones:
+            for hab in habitaciones:
+                print(f"ID: {hab[0]} | Número: {hab[1]} | Tipo: {hab[2]} | Precio: {hab[3]} | Estado: {hab[4]}")
+        else:
+            print("No hay habitaciones registradas.")
