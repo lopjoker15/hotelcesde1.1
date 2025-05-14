@@ -4,6 +4,7 @@ from data.CustomerRepository import CustomerRepository
 from data.ConexionMySQL import Conexion
 from application.ReservaService import ReservaService
 from application.ServicioService import ServicioService
+from application.PagoService import PagoService
 
 
 class Menu:
@@ -15,6 +16,7 @@ class Menu:
         self.customer_repo = CustomerRepository()
         self.reserva_service = ReservaService()
         self.servicio_service = ServicioService()
+        self.pago_service = PagoService()
         self.logged_in = False  # Estado de sesión
 
     def app(self):
@@ -44,16 +46,21 @@ class Menu:
                 print("\nMenú - Usuario autenticado:")
                 print("1. Ver servicios")
                 print("2. Hacer una reserva")
-                print("3. Salir")
+                print("3. Realizar un pago")
+                print("4. Salir")
+                
                 option = input("Seleccione una opción: ")
-    
+                
                 if option == '1':
-                     self.servicio_service.mostrar_servicios(self.db, self.customer.id)
+                    self.servicio_service.mostrar_servicios(self.db, self.customer.id)
                 elif option == '2':
                     self.reserva_service.hacer_reserva(self.db)
                 elif option == '3':
+                    self.pago_service.realizar_pago(self.db, self.customer.id)
+                elif option == '4':
                     print("Saliendo del programa...")
                     break
+
                 else:
                     print("Opción no válida. Por favor, seleccione una opción correcta.")
 

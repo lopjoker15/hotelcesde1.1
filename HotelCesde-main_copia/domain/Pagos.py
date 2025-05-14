@@ -1,11 +1,7 @@
-from domain.Reserva import Reserva
-
 class Pago:
-    def __init__(self, id, reserva: Reserva, monto, metodo_pago):
+    def __init__(self, id, id_cliente, monto, metodo_pago, fecha):
         self.id = id
-        self.reserva = reserva
+        self.id_cliente = id_cliente
         self.monto = monto
         self.metodo_pago = metodo_pago
-
-    def __str__(self):
-        return f"Pago(ID={self.id}, Reserva={self.reserva.id}, Monto={self.monto}, Método={self.metodo_pago})"
+        self.fecha = fecha
