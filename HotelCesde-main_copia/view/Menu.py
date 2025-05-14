@@ -50,7 +50,7 @@ class Menu:
                 option = input("Seleccione una opción: ")
     
                 if option == '1':
-                    self.servicio_service.mostrar_servicios()
+                     self.servicio_service.mostrar_servicios(self.db, self.customer.id)
                 elif option == '2':
                     self.reserva_service.hacer_reserva(self.db)
                 elif option == '3':
@@ -60,11 +60,15 @@ class Menu:
                     print("Opción no válida. Por favor, seleccione una opción correcta.")
 
     def login(self):
-        email = input("Ingrese su correo: ")
-        password = input("Ingrese su contraseña: ")
-        if self.customer_service.login(self.db, email, password):
-            print("Login exitoso.")
-            self.logged_in = True
-        else:
-            print("Credenciales inválidas.")
-            self.logged_in = False
+      email = input("Ingrese su correo: ")
+      password = input("Ingrese su contraseña: ")
+      customer = self.customer_service.login(self.db, email, password)
+      if customer:
+          print("Login exitoso.")
+          self.logged_in = True
+          self.customer = customer  # Guarda al cliente actual
+      else:
+          print("Credenciales inválidas.")
+          self.logged_in = False
+
+
