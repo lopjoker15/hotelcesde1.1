@@ -68,6 +68,18 @@ class CustomerRepository:
         except Exception as e:
             print(f"Error en el login: {e}")
             return False
+        
+    def get_customer_by_credentials(self, db, email, password):
+      query = "SELECT * FROM customer WHERE email = %s AND password = %s"
+      cursor = db.connection.cursor()
+      cursor.execute(query, (email, password))
+      result = cursor.fetchone()
+      cursor.close()
+      if result:
+          return Customer(*result)
+      return None
+
+
 
 
 
